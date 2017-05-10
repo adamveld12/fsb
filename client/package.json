@@ -1,0 +1,23 @@
+{
+  "name": "fsb",
+  "version": "0.1.0",
+  "private": true,
+  "homepage": "https://fsb.veldhousen.ninja",
+  "dependencies": {
+    "react": "^15.5.4",
+    "react-dom": "^15.5.4",
+    "react-fontawesome": "^1.6.1",
+    "react-list": "^0.8.5",
+    "weedux": "^1.1.2"
+  },
+  "devDependencies": {
+    "react-scripts": "0.9.5",
+    "sw-precache": "^5.1.0"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build && sw-precache --config=sw-precache-config.js",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject"
+  }
+}

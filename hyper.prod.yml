@@ -1,0 +1,16 @@
+version: '2'
+services:
+  redis:
+    image: redis:alpine
+    size: 'S1'
+  api-server:
+    fip: 209.177.85.31
+    image: adamveld12/fsb-api:latest
+    size: 'S1'
+    env_file:
+        - .env
+    ports:
+      - '80:80'
+      - '443:443'
+    links:
+      - redis

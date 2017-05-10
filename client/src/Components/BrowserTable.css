@@ -1,0 +1,33 @@
+.reactable-pagination {
+  background-color: #FF9F1C;
+  color: #262626;
+}
+
+.reactable-previous-page, .reactable-next-page {
+  margin: 0 20px;
+  background-color: #FF9F1C;
+  color: #262626;
+  font-size: .8em;
+}
+
+.reactable-filter-input {
+  width: 500px;
+}
+
+.reactable-page-button {
+  margin: 0 2px;
+}
+
+.reactable-page-button a {
+  color: #412F1E;
+
+}
+
+.reactable-page-button a:link {
+  color: #412F1E;
+}
+
+.reactable-current-page {
+   color: black !important;
+   text-decoration: underline !important;
+}

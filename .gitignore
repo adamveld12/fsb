@@ -1,0 +1,15 @@
+# general
+.DS_Store
+.env
+prod.env
+
+# server
+server/api-server
+server/vendor
+server/certs/*
+
+# client
+./client/coverage
+./client/build/*
+npm-debug.log
+node_modules
