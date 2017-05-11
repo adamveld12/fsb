@@ -1,3 +1,11 @@
-# Factorio Server Browser
+# [Factorio Server Browser](https://fsb.veldhousen.ninja)
 
-An api server + web client running on hyper.sh
+Browse Factorio multiplayer games.
+
+WIP asf.
+
+An api server + web client running on [hyper.sh](https://hyper.sh/).
+
+
+
+![Just showing off](/scroll-test.gif)
