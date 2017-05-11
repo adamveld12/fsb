@@ -3,6 +3,7 @@ import weedux, { middleware } from 'weedux';
 export const initialState = {
   servers: {
     games: [],
+    details: {},
     loading: true,
     error: ""
   },
@@ -21,7 +22,7 @@ const reducers = [
     switch(a.type){
       case "GAMES_START":
       case "DETAILS_START":
-        newState.servers.loading = true;
+        newState.servers.details[a.gameId] = { loading: true };
         break;
 
       case "GAMES_COMPLETE":
@@ -30,8 +31,7 @@ const reducers = [
         break;
 
       case "DETAILS_COMPLETE":
-        newState.servers.games[a.index].details = a.payload
-        newState.servers.loading = false;
+        newState.servers.details[a.gameId] = { ...a.payload, loading: false };
         break;
 
       case "GAMES_FAIL":
@@ -64,7 +64,7 @@ export const actions = {
 
     fetch(`${process.env.REACT_APP_API_SERVER_HOST}/api/v1/details?gameId=${gameId}`)
       .then(r => r.json())
-      .then((p) => d({ type: "DETAILS_COMPLETE", gameId, index, payload: p }))
+      .then((p) => d({ type: "DETAILS_COMPLETE", gameId, payload: p }))
       .catch(() => d({ type: "DETAILS_FAIL" }));
   })
 }

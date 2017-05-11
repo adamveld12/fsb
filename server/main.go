@@ -66,7 +66,7 @@ func main() {
 		h := res.Header()
 		h.Set("Content-Type", "application/json")
 		h.Set("Content-Encoding", "gzip")
-		h.Set("Cache-Control", "public, max-age=120")
+		h.Set("Cache-Control", "public, max-age=300")
 		res.Write(details)
 	})
 

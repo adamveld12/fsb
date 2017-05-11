@@ -22,44 +22,59 @@ const styles = {
   },
   list: {
     marginTop: "15px",
+    marginBottom: "10px",
     backgroundColor: "#575A5A",
     overflowY: 'scroll',
     overflowX: 'hidden',
-    maxHeight: "95%"
+    maxHeight: "950px"
   }
 };
 
 export default class ServerList extends Component {
+  handleScroll(evt){
+    const s = this.refs.scroller;
+    const { servers, details } = this.props;
+    s.getVisibleRange().forEach((i) => {
+      const { game_id } = servers[i];
+      if (!(details[game_id] || {}).loading){
+        this.onLoadDetails(game_id);
+      }
+    })
+  }
+
   onLoadDetails(gameId, index){
     actions.details(gameId, index);
   }
 
-  renderRows(servers){
+  renderRows(servers, details){
     if (servers.length === 0)
       return (i, k) => (<div>No servers to show</div>);
 
-    return (i, k) => (<ServerListRow key={k}
-                                     index={i}
-                                     server={servers[i]}
-                                     details={servers[i].details || ""}
-                                     onClick={(g, i) => this.onLoadDetails(g, i)} />);
+    return (i, k) => {
+      const { game_id } = servers[i];
+
+      return (<ServerListRow key={k}
+                             index={i}
+                             server={servers[i]}
+                             details={details[game_id] || {}}
+                             onClick={(g, i) => this.onLoadDetails(g, i)} />);
+    }
   }
 
   render() {
-    const { servers, loading } = this.props;
+    const { servers, loading, details } = this.props;
 
     return (
       <section style={styles.container}>
         <header style={styles.header}>
           <span>{ loading ? "loading..." : `${servers.length} games active`} </span>
         </header>
-        <div style={styles.list}>
-          <ReactList itemRenderer={this.renderRows(servers)}
-                     useStaticSize={true}
-                     type='uniform'
-                     pageSize={15}
-                     length={servers.length} />
-                     <div style={{ clear: "both"}}> </div>
+        <div style={styles.list} onScroll={this.handleScroll.bind(this)}>
+           <ReactList ref="scroller" itemRenderer={this.renderRows(servers, details)}
+                      useStaticSize={true}
+                      type='uniform'
+                      pageSize={15}
+                      length={servers.length} />
         </div>
       </section>
     );

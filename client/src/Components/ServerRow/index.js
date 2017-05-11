@@ -57,16 +57,14 @@ export default class ServerListRow extends PureComponent {
           game_version,
           build_mode
         },
-        details
       },
-      index,
-      //isLoading,
+      details,
       onClick
     } = this.props;
 
 
     return (
-      <section className="server-row" id={game_id} style={styles.root} onClick={() => onClick(game_id, index)}>
+      <section className="server-row" id={game_id} style={styles.root} onClick={() => onClick(game_id)}>
         <header style={styles.header}>
           <h2 style={styles.header_h2}>
             { name }&nbsp;

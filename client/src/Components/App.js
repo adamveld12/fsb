@@ -26,7 +26,7 @@ export default class App extends Component {
     return (
       <section className="App">
         <Header />
-        <ServerList loading={servers.loading} servers={servers.games} />
+        <ServerList loading={servers.loading} details={servers.details} servers={servers.games} />
       </section>
     );
   }
