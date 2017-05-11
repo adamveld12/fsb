@@ -9,7 +9,7 @@ server/vendor
 server/certs/*
 
 # client
-./client/coverage
-./client/build/*
+client/coverage
+client/build/
 npm-debug.log
 node_modules

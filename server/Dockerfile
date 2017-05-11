@@ -8,7 +8,7 @@ ENV FSB_FACTORIO_USERNAME=
 ENV FSB_FACTORIO_TOKEN=
 
 WORKDIR /app
-COPY . /app
+COPY ./api-server /app
 RUN apt-get update && apt-get install -y ca-certificates && apt-get clean
 
 EXPOSE 80 443

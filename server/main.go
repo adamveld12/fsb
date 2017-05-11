@@ -86,7 +86,7 @@ func main() {
 	go func() {
 		certManager := autocert.Manager{
 			Prompt:     autocert.AcceptTOS,
-			HostPolicy: autocert.HostWhitelist("fsb-api.veldhousen.ninja"),
+			HostPolicy: autocert.HostWhitelist("fsb-api.veldhousen.ninja", "fsbapi.veldhousen.ninja"),
 			Cache:      autocert.DirCache("certs"),
 		}
 
