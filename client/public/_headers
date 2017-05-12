@@ -6,5 +6,11 @@
 /static/*
   Cache-Control: public, max-age=3600000, immutable
 
+/service-worker.js
+  Cache-Control: public, max-age=25000, immutable
+
+/index.html?_sw-precache=23b5368476bf4083c18ae85da1cd0460
+  Cache-Control: public, max-age=360, immutable
+
 /favicon.ico
   Cache-Control: public, max-age=3600000, immutable
