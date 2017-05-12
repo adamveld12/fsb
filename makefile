@@ -22,11 +22,10 @@ server/setup:
 server/api-server:
 	CGO_ENABLED=0 GOOS=linux go build -o ./server/api-server ./server
 server/build: server/api-server
-	cd ./server && docker build -t adamveld12/fsb-api:latest .
-	docker push adamveld12/fsb-api:latest
-	hyper pull adamveld12/fsb-api:latest
+	cd ./server && docker build -t adamveld12/fsb-api .
 
 server/deploy: server/clean ./server/api-server ./server/build
+	hyper pull adamveld12/fsb-api:latest
 	hyper compose up -f ./hyper.prod.yml --force-recreate -d
 
 
