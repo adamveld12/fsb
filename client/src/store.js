@@ -1,7 +1,9 @@
 import weedux, { middleware } from 'weedux';
+import { pageView, event, error, time } from './ga.js';
 
 export const initialState = {
   servers: {
+    gamesRefreshCount: 0,
     games: [],
     details: {},
     loading: true,
@@ -14,10 +16,30 @@ export const initialState = {
   }
 };
 
+function initActions(dispatch){
+  return {
+    games: () => dispatch((d) => {
+      d({ type: "GAMES_START" });
+
+      fetch(`${process.env.REACT_APP_API_SERVER_HOST}/api/v1/games`)
+        .then(r => r.json())
+        .then((p) => d({ type: "GAMES_COMPLETE", payload: p}))
+        .catch((e) => d({ type: "GAMES_FAIL", error: e }));
+    }),
+    details: (gameId, index) => dispatch((d) => {
+      d({ type: "DETAILS_START" });
+
+      fetch(`${process.env.REACT_APP_API_SERVER_HOST}/api/v1/details?gameId=${gameId}`)
+        .then(r => r.json())
+        .then((p) => d({ type: "DETAILS_COMPLETE", gameId, payload: p }))
+        .catch((e) => d({ type: "DETAILS_FAIL", gameId, error: e }));
+    })
+  }
+}
 
 const reducers = [
   (s, a) => {
-    var newState = { ...s };
+    const newState = { ...s };
 
     switch(a.type){
       case "GAMES_START":
@@ -26,6 +48,13 @@ const reducers = [
         break;
 
       case "GAMES_COMPLETE":
+        event({
+          category: "API Call",
+          action: "Loaded Games",
+          label: "API returned " + a.payload.length + " games.",
+          value: newState.servers.gamesRefreshCount + 1
+        });
+        newState.servers.gamesRefreshCount++;
         newState.servers.games = a.payload;
         newState.servers.loading = false;
         break;
@@ -35,7 +64,13 @@ const reducers = [
         break;
 
       case "GAMES_FAIL":
+        error("Could not load games: " + a.error, true);
+        newState.servers.loading = false;
+        newState.servers.error = "woops.jpg";
+        break;
+
       case "DETAILS_FAIL":
+        error("Could not load game details for game " + a.gameId + " :" + a.error, true);
         newState.servers.loading = false;
         newState.servers.error = "woops.jpg";
         break;
@@ -49,25 +84,6 @@ const reducers = [
 ];
 
 const store = new weedux( initialState, reducers, [middleware.thunk]);
-const dispatch = store.dispatcher().bind(store);
-export const actions = {
-  games: () => dispatch((d) => {
-    d({ type: "GAMES_START" });
 
-    fetch(`${process.env.REACT_APP_API_SERVER_HOST}/api/v1/games`)
-      .then(r => r.json())
-      .then((p) => d({ type: "GAMES_COMPLETE", payload: p}))
-      .catch((e) => d({ type: "GAMES_FAIL", payload: e }));
-  }),
-  details: (gameId, index) => dispatch((d) => {
-    d({ type: "DETAILS_START" });
-
-    fetch(`${process.env.REACT_APP_API_SERVER_HOST}/api/v1/details?gameId=${gameId}`)
-      .then(r => r.json())
-      .then((p) => d({ type: "DETAILS_COMPLETE", gameId, payload: p }))
-      .catch(() => d({ type: "DETAILS_FAIL" }));
-  })
-}
-
-
+export const actions = initActions(store.dispatcher().bind(store));
 export default store;

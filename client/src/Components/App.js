@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { pageView } from '../ga.js';
 import './App.css';
 
 import store, { initialState, actions } from '../store.js';
@@ -14,6 +15,7 @@ export default class App extends Component {
   }
 
   componentDidMount(){
+    pageView();
     actions.games();
   }
 
