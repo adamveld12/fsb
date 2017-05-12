@@ -1,0 +1,10 @@
+/
+  Link: rel=preload as=stylesheet
+  Link: rel=preload as=script
+  Link: rel=preload as=image
+
+/static/*
+  Cache-Control: public, max-age=360000, immutable
+
+/favicon.ico
+  Cache-Control: public, max-age=360000, immutable
