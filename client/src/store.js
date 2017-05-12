@@ -1,5 +1,5 @@
 import weedux, { middleware } from 'weedux';
-import { pageView, event, error, time } from './ga.js';
+import { event, error } from './ga.js';
 
 export const initialState = {
   servers: {
