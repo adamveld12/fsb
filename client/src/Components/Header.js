@@ -1,4 +1,6 @@
 import React, { PureComponent } from 'react';
+import Search from './Search';
+
 import logo from './factorio.png';
 
 const styles = {
@@ -22,6 +24,8 @@ const styles = {
     padding: "10px",
     borderBottom: "2px #862402",
     boxShadow: "inset 0 2px 3px 0 #862402, 0 2px 3px 0 #862402",
+    display: "flex",
+    justifyContent: "space-between"
   },
   h1: {
     margin: "0 5px",
@@ -41,7 +45,12 @@ export default class Header extends PureComponent {
           <img src={logo} className="App-logo" alt="factorio" />
         </div>
         <div style={styles.lower}>
-          <h1 style={styles.h1}>Server Browser</h1><small>(Unoffical)</small>
+          <div >
+            <h1 style={styles.h1}>Server Browser</h1><small>(Unoffical)</small>
+          </div>
+          <div >
+            <Search />
+          </div>
         </div>
       </div>
     );
