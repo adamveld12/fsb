@@ -4,7 +4,7 @@
   Link: rel=preload as=image
 
 /static/*
-  Cache-Control: public, max-age=360000, immutable
+  Cache-Control: public, max-age=3600000, immutable
 
 /favicon.ico
-  Cache-Control: public, max-age=360000, immutable
+  Cache-Control: public, max-age=3600000, immutable
