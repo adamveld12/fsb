@@ -43,6 +43,9 @@ const reducers = [
 
     switch(a.type){
       case "GAMES_START":
+        newState.servers.loading = true;
+        break;
+
       case "DETAILS_START":
         newState.servers.details[a.gameId] = { loading: true };
         break;

@@ -14,14 +14,16 @@ const styles = {
     borderRadius: "5px 5px 0 0",
     backgroundColor: "#262626",
     boxShadow: "inset 0 0px 15px 0px #995900",
-    padding: "15px 10px",
+    padding: "15px",
     marginBottom: "3px",
+    display: "flex",
+    justifyContent: "space-between"
   },
   lower: {
     borderRadius: "0 0 5px 5px",
     backgroundColor: "#FF9F1C",
     color: "#262626",
-    padding: "10px",
+    padding: "15px",
     borderBottom: "2px #862402",
     boxShadow: "inset 0 2px 3px 0 #862402, 0 2px 3px 0 #862402",
     display: "flex",
@@ -43,6 +45,9 @@ export default class Header extends PureComponent {
       <div style={styles.root}>
         <div style={styles.upper} >
           <img src={logo} className="App-logo" alt="factorio" />
+          <div style={{ color: "#FF9F1C" }}>
+            <a target="_blank" href="https://www.factorio.com">www.factorio.com</a>
+          </div>
         </div>
         <div style={styles.lower}>
           <div >

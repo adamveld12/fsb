@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import ReactList from 'react-list';
+import FontAwesome from 'react-fontawesome';
 
 import ServerListRow from './ServerRow';
 import { actions } from '../store.js';
@@ -67,7 +68,9 @@ export default class ServerList extends Component {
     return (
       <section style={styles.container}>
         <header style={styles.header}>
-          <span>{ loading ? "loading..." : `${servers.length} games active`} </span>
+          <FontAwesome name="refresh" style={{ display: loading ? "none" : "inline" }} onClick={() => !loading && actions.games()}/>
+          <span style={{ margin: "0 5px" }}>{ loading ? "loading..." : `${servers.length} games active`} </span>
+          { /* 1min auto refresh option shoud go here */ }
         </header>
         <div style={styles.list} onScroll={this.handleScroll.bind(this)}>
            <ReactList ref="scroller" itemRenderer={this.renderRows(servers, details)}
