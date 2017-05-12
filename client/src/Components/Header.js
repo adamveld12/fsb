@@ -45,8 +45,13 @@ export default class Header extends PureComponent {
       <div style={styles.root}>
         <div style={styles.upper} >
           <img src={logo} className="App-logo" alt="factorio" />
-          <div style={{ color: "#FF9F1C" }}>
-            <a target="_blank" href="https://www.factorio.com">www.factorio.com</a>
+          <div style={{ color: "#FF9F1C", fontSize: ".9em" }}>
+            <div>
+              <a target="_blank" href="https://www.factorio.com">www.factorio.com</a>
+            </div>
+            <div>
+              Powered by <a target="_blank" href="https://www.netlify.com/">Netlify</a>
+            </div>
           </div>
         </div>
         <div style={styles.lower}>
