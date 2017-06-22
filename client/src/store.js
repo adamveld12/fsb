@@ -18,6 +18,9 @@ export const initialState = {
 
 function initActions(dispatch){
   return {
+    search: ({ terms }) => dispatch((d) => {
+      d({ type: "GAMES_SEARCH", terms })
+    }),
     games: () => dispatch((d) => {
       d({ type: "GAMES_START" });
 
@@ -42,7 +45,14 @@ const reducers = [
     const newState = { ...s };
 
     switch(a.type){
+      case "GAMES_SEARCH":
+        newState.search.terms = a.terms;
+        break;
+
       case "GAMES_START":
+        newState.servers.loading = true;
+        break;
+
       case "DETAILS_START":
         newState.servers.details[a.gameId] = { loading: true };
         break;

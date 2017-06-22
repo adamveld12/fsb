@@ -45,7 +45,7 @@ func main() {
 
 	mux.Get("/api/v1", func(res http.ResponseWriter, req *http.Request) {
 		h := res.Header()
-		h.Set("Cache-Control", "public, max-age=300")
+		h.Set("Cache-Control", "public, max-age=360000")
 		res.Write([]byte("/api/v1:\n\ngames: gets a list of games from factorio\ndetails?gameId=<gameId>: gets details about the game from factorio"))
 	})
 

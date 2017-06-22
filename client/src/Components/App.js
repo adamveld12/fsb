@@ -11,10 +11,10 @@ export default class App extends Component {
   constructor(){
     super();
     this.state = initialState;
-    this.__handle__ = store.onDispatchComplete((s, a) => this.setState(s));
   }
 
   componentDidMount(){
+    this.__handle__ = store.onDispatchComplete((s, a) => this.setState(s));
     pageView();
     actions.games();
   }
@@ -24,11 +24,14 @@ export default class App extends Component {
   }
 
   render() {
-    const { servers } = this.state;
+    const { servers, search: { terms } } = this.state;
+    var t = terms.toLowerCase();
     return (
       <section className="App">
         <Header />
-        <ServerList loading={servers.loading} details={servers.details} servers={servers.games} />
+        <ServerList loading={servers.loading}
+                    details={servers.details}
+                    servers={servers.games.filter(g => t === "" || g.name.toLowerCase().indexOf(t) > -1)} />
       </section>
     );
   }
