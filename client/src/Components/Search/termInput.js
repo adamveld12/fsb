@@ -26,11 +26,16 @@ export default class TermInput extends PureComponent {
     this.state = { terms: "" };
   }
 
-  onTermChange({ target: { value } }){
+  handleEnter = ({ key }) => {
+    if (key === 'Enter')
+      this.onSubmit()
+  }
+
+  onTermChange = ({ target: { value } }) => {
     this.setState({ terms: value });
   }
 
-  onSubmit(){
+  onSubmit = () => {
     const { onSubmit } = this.props;
     const { terms } = this.state;
 
@@ -41,8 +46,11 @@ export default class TermInput extends PureComponent {
   render() {
     return (
       <div style={styles.root}>
-        <input style={styles.inputBox} type="text" onChange={this.onTermChange.bind(this)}/>
-        <button style={styles.submitButton}>
+        <input style={styles.inputBox}
+               type="text"
+               onKeyPress={this.handleEnter}
+               onChange={this.onTermChange}/>
+        <button style={styles.submitButton} onClick={this.onSubmit} >
           <FontAwesome name="search" />
         </button>
       </div>
